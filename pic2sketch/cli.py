@@ -18,9 +18,14 @@ Itcan be used as a handy facility for running the task from a command line.
 .. currentmodule:: pic2sketch.cli
 .. moduleauthor:: Allen Shaw <lonsty@sina.com>
 """
+import os
+import sys
 import logging
+
 import click
+
 from .__init__ import __version__
+from .picture_to_sketch import list_files, mkdirs_if_not_exist, multi_processes_tasks
 
 LOGGING_LEVELS = {
     0: logging.NOTSET,
@@ -50,7 +55,7 @@ pass_info = click.make_pass_decorator(Info, ensure=True)
 @click.option("--verbose", "-v", count=True, help="Enable verbose output.")
 @pass_info
 def cli(info: Info, verbose: int):
-    """Run p2sk."""
+    """Command line kit to convert a picture to a sketch."""
     # Use the verbosity count to determine the logging level...
     if verbose > 0:
         logging.basicConfig(
@@ -66,16 +71,60 @@ def cli(info: Info, verbose: int):
             )
         )
     info.verbose = verbose
+    return 0
 
 
 @cli.command()
+@click.option('-d', '--destination', default=None, help='Destination to save the converted picture(s).')
+@click.option('-s', '--sigma', default=30, show_default=True, help='Gaussian filter sigma.')
+@click.option('--include', multiple=True, help='Pattern of file or folder to include, this option can use multiple times.')
+@click.option('--exclude', multiple=True, help='Pattern of file or folder to exclude, this option can use multiple times.')
+@click.argument('input')
 @pass_info
-def hello(_: Info):
-    """Say 'hello' to the nice people."""
-    click.echo("p2sk says 'hello'")
+def draw(_: Info, input, destination, include, exclude, sigma):
+    """Draw sketch(es) from a picture or folder."""
+
+    if os.path.isfile(input):
+        input_files = [input]
+    elif os.path.isdir(input):
+        include = set(include).update(['*.jpg', '*.png', '*.JPG', '*.PNG'])
+        input_files = list_files(input, include, exclude)
+    else:
+        click.echo('The <INPUT> must be a file or folder.')
+        sys.exit(1)
+
+    if destination and input_files:
+        mkdirs_if_not_exist(destination)
+
+    multi_processes_tasks(input_files, destination, sigma)
 
 
 @cli.command()
 def version():
     """Get the library version."""
     click.echo(click.style(f"{__version__}", bold=True))
+
+
+
+@click.command()
+@click.option('-d', '--destination', default=None, help='Destination to save the converted picture(s).')
+@click.option('-s', '--sigma', default=30, show_default=True, help='Gaussian filter sigma.')
+@click.option('--include', multiple=True, help='Pattern of file or folder to include, this option can use multiple times.')
+@click.option('--exclude', multiple=True, help='Pattern of file or folder to exclude, this option can use multiple times.')
+@click.argument('input')
+def main(input, destination, include, exclude, sigma):
+    """Draw sketch(es) from a picture or folder."""
+
+    if os.path.isfile(input):
+        input_files = [input]
+    elif os.path.isdir(input):
+        include = set(include).update(['*.jpg', '*.png', '*.JPG', '*.PNG'])
+        input_files = list_files(input, include, exclude)
+    else:
+        click.echo('The <INPUT> must be a file or folder.')
+        sys.exit(1)
+
+    if destination and input_files:
+        mkdirs_if_not_exist(destination)
+
+    multi_processes_tasks(input_files, destination, sigma)

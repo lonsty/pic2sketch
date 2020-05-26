@@ -49,8 +49,8 @@ def test_hello_displays_expected_message():
     Assert:  The output matches the library version.
     """
     runner: CliRunner = CliRunner()
-    result: Result = runner.invoke(cli.cli, ["hello"])
+    result: Result = runner.invoke(cli.cli, ["draw", "--help"])
     # fmt: off
-    assert 'p2sk' in result.output.strip(), \
-        "'Hello' messages should contain the CLI name."
+    assert 'Draw' in result.output.strip(), \
+        "'Draw' messages should contain the CLI name."
     # fmt: on

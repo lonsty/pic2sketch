@@ -49,11 +49,15 @@ setup(
     version=version,
     install_requires=[
         # Include dependencies here
-        'click>=7.0,<8'
+        'click>=7.0,<8',
+        'numpy>=1.18.4',
+        'imageio>=2.8.0',
+        'scipy>=1.4.1',
+        'matplotlib>=3.2.1'
     ],
     entry_points="""
     [console_scripts]
-    p2sk=pic2sketch.cli:cli
+    p2sk=pic2sketch.cli:main
     """,
     python_requires=">=0.0.1",
     license='MIT',  # noqa
