@@ -1,0 +1,3 @@
+name: pic2sketch
+dependencies:
+  - python=3.6
