@@ -46,7 +46,7 @@ def list_files(dir_name: str, include: Iterable = None, exclude: Iterable = None
                 break
         else:
             if os.path.isdir(full_path):
-                all_files = all_files + list_files(full_path, include, exclude)
+                all_files += list_files(full_path, include, exclude)
             else:
                 if not include:
                     all_files.append(full_path)
