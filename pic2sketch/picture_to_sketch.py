@@ -2,6 +2,7 @@
 # @Date: May 26 14:37 2020
 from typing import Iterable
 import os
+import traceback
 import warnings
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from fnmatch import fnmatch
@@ -10,8 +11,10 @@ from fnmatch import fnmatch
 import imageio
 import matplotlib.pyplot as plt
 import numpy as np
+from PIL import ImageFile
 import scipy.ndimage
 
+ImageFile.LOAD_TRUNCATED_IMAGES = True  # Fix error of "image file is truncated"
 warnings.filterwarnings('ignore')  # Disable numpy warnings
 
 
@@ -77,16 +80,12 @@ def p2sk(img, destination: str, sigma: int=30):
     if not destination:
         destination = os.path.dirname(os.path.abspath(img))
 
-    formula = [0.299, 0.587, 0.114]
-
     start_img = imageio.imread(img)
-
-    if start_img.shape[2] == 3:
-        formula = [0.299, 0.587, 0.114]
-    elif start_img.shape[2] == 4:
-        formula = [0.299, 0.587, 0.114, -0.35]
-
-    gray_img = _grayscale(start_img, formula)
+    # if start_img.shape[2] == 3:
+    #     formula = [0.299, 0.587, 0.114]
+    # elif start_img.shape[2] == 4:
+    #     formula = [0.299, 0.587, 0.114, -0.35]
+    gray_img = _grayscale(start_img)
     inverted_img = 255 - gray_img
 
     blur_img = scipy.ndimage.filters.gaussian_filter(inverted_img, sigma=sigma)
@@ -107,6 +106,6 @@ def multi_processes_tasks(images: list, dest: str, sigma: int):
         try:
             result = future.result()
         except Exception as e:
-            print(e)
+            print(traceback.format_exc())
         else:
             print(result)
