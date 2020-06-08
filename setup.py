@@ -59,7 +59,7 @@ setup(
     [console_scripts]
     p2sk=pic2sketch.cli:main
     """,
-    python_requires=">=0.0.1",
+    python_requires=">=0.1.0",
     license='MIT',  # noqa
     author='Allen Shaw',
     author_email='lonsty@sina.com',
