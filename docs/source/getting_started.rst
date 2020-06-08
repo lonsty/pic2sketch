@@ -16,5 +16,26 @@ You can use pip to install `pic2sketch`.
 
     pip install pic2sketch
 
+Usage
+=====
 
+Use `pic2sketch` to convert pictures to sketches in the terminal:
 
+.. code-block:: sh
+
+    p2sk < PIC | DIR > [ --include SYNTAX ] [ --exclude SYNTAX ] [ -s | --sigma INT] [ -d | --destination DIR ]
+
+Examples
+========
+
+* Convert a picture to sketch:
+
+.. code-block:: sh
+
+    p2sk example.jpg
+
+* Convert all pictures in a folder `photos/` to sketches, include filename has a word of `example`, exclude filename has a word of `sketch`, then save all the sketches to folder `new/`:
+
+.. code-block:: sh
+
+    p2sk photos/ --include "*example*" --exclude "*sketch*" -d new/
