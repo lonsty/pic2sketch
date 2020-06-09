@@ -67,7 +67,7 @@ sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode",
-              "sphinx.ext.githubpages", "pallets_sphinx_themes"]
+              "sphinx.ext.githubpages", 'karma_sphinx_theme']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -82,8 +82,8 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "pic2sketch"
-copyright = "2019, lonsty"
+project = "Picture to Sketch"
+copyright = "2020, lonsty"
 author = "Allen Shaw"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -125,12 +125,13 @@ todo_include_todos = False
 # fmt: off
   # noqa
 # fmt: on
-html_theme = "flask"
+# html_theme = "alabaster"
+html_theme = "karma_sphinx_theme"
 
 html_theme_options = {
-    "logo": "logo.png",
-    "github_user": "lonsty",
-    "github_repo": "pic2sketch",
+    # "logo": "logo.png",
+    # "github_user": "lonsty",
+    # "github_repo": "pic2sketch",
 }
 # fmt: off
   # noqa
