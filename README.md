@@ -15,6 +15,32 @@ The project's documentation contains a section to help you
 [get started](https://pic2sketch.readthedocs.io/en/latest/getting_started.html) as a developer or
 user of the library.
 
+## Examples
+
+```sh
+$ p2sk [-s INTETER] < FILE | DIRECTORY >
+```
+
+Example picture:
+
+![](examples/gsl.jpg)
+
+- `-s 10`
+
+![](examples/gsl_10.jpg)
+
+- `-s 30`
+
+![](examples/gsl_30.jpg)
+
+- `-s 50`
+
+![](examples/gsl_50.jpg)
+
+- `-s 200`
+
+![](examples/gsl_200.jpg)
+
 ## Development Prerequisites
 
 If you're going to be working in the code (rather than just using the library), you'll want a few utilities.
@@ -41,6 +67,7 @@ See also the list of [contributors](https://github.com/lonsty/pic2sketch/contrib
 
 ## LicenseMIT License
 
+```
 Copyright (c) lonsty
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -60,3 +87,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
