@@ -1,0 +1,27 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+click = "<8,>=7.0"
+pip-licenses = "==2.2.0"
+numpy = "==1.18.4"
+imageio = "==2.8.0"
+scipy = "==1.4.1"
+matplotlib = "==3.2.1"
+flake8 = "<4,>=3.7.9"
+flake8-docstrings = "<2,>=1.5.0"
+pytest = "==5.4.2"
+pytest-cov = "<3,>=2.5.1"
+pytest-pythonpath = ">=0.7.2,<1"
+tox = ">=3.0.0,<4"
+twine = "==3.1.1"
+pip_check_reqs = "<3,>=2.0.1"
+Sphinx = ">=2.2.0"
+Pallets-Sphinx-Themes = "==1.2.3"
+
+[requires]
+python_version = "3.6"
