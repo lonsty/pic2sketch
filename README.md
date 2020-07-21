@@ -18,6 +18,9 @@ user of the library.
 ## Examples
 
 ```sh
+# Install via PIP
+$ pip install -U pic2sketch
+# Usage
 $ p2sk [-s INTETER] < FILE | DIRECTORY >
 ```
 
